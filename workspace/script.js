@@ -11,11 +11,13 @@ const movies = db.movies
 })
 .projection({
     title: true,
+    year: true,
     _id: false
 })
 .sort({
     year: -1
 })
+.limit(5);
 
 console.log(movies);
 
