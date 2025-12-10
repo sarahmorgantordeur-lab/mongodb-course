@@ -5,9 +5,16 @@ db = db.getSiblingDB('sample_mflix');
 // SELECT title FROM movies WHERE released IS NULL
 const movies = db.movies
 .find({
-    released:  {
-        $exists: false
-    }
+    $or : [
+        {
+            title: "Jurassic Park"
+        },
+        {
+            year: {
+                $eq: 2025
+            }
+        }
+    ]
 })
 .projection({
     title: true,
@@ -17,8 +24,7 @@ const movies = db.movies
 .sort({
     year: -1
 })
-.limit(5)
-.count();
+.limit(5);
 
 console.log(movies);
 
