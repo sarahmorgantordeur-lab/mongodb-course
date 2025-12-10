@@ -1,65 +1,21 @@
 let db = connect("mongodb://root:test123@localhost:27017?authSource=admin");
-// USE technocite
-db = db.getSiblingDB('sample_mflix');
 
-// SELECT title FROM movies WHERE released IS NULL
-const movies = db.movies
-    // .find({
-    //     cast: {
-    //         $in: ["Keanu Reeves"]
-    //     }
-    // });
+db = db.getSiblingDB('technocite');
 
-    // .find({
-    //     genres: {
-    //         $in: ["Comedy"]
-    //     }
-    // });
+const students = db.students.find();
 
-    // .find({
-    //     year: {
-    //         $gte: 2002, $lte: 2008
-    //     }
-    // })
+console.log(students);
 
-    // .find({
-    //     $and: [
-    //         {
-    //             cast: {
-    //                 $in: ["Chris O'Donnell"]
-    //             },
-    //             cast: {
-    //                 $in: ["Matt Damon"]
-    //             }
-    //         }
-    //     ]
-    // })
 
-    // .find({
-    //     $or: [
-    //         {directors: ["Neil Burger"]},
-    //         {directors: ["Brad Furman"]}
-    //     ]
-    // })
+const premierEtudiantId = students.toArray()[0]._id;
 
-// const movie = movies.aggregate([
-//   {
-//     $group: {
-//         _id: null,
-//         minYear: { $min: "$year" }
-//     }
-//   }
-// ])
+// UPDATE students SET courses = ["Java", "C#", "Mysql"]
+const updateResult = db.students.updateOne({
+    _id: premierEtudiantId
+}, {
+    $set: {
+        courses: ["Java", "C#", "Mysql"]
+    }
+});
 
-// const movie = movies.find({
-//         $and: [
-//             {"imdb.rating": {$glt: 8.0}},
-//             {"tomatoes.critic.rating": {$glt: 8}}
-//         ]
-//     })
-
-.find({
-    "realeased.date": { $exists: false }
-})
-console.log(movies);
-
+console.log(updateResult);
