@@ -3,13 +3,14 @@
   "version": "1.0.0",
   "description": "Partie mongoose - exemples",
   "author": "TRIPTYK",
+  "type": "module",
   "license": "MIT",
   "dependencies": {
     "mongoose": "^8.3.3"
   },
   "devDependencies": {
     "express": "~5.2.1",
-    "ts-node": "~10.9.2",
+    "tsx": "~4.21.0",
     "typescript": "~5.9.3"
   }
 }
