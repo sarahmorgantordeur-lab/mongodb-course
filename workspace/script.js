@@ -4,7 +4,8 @@ db = db.getSiblingDB('sample_mflix');
 
 const movies = db.movies.find({
     genres: {
-        $all: ["Romance", "War"]
+        // tableau
+        $type: 4
     }
 });
 
