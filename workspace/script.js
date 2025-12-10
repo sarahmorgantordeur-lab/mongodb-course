@@ -17,7 +17,8 @@ const movies = db.movies
 .sort({
     year: -1
 })
-.limit(5);
+.limit(5)
+.count();
 
 console.log(movies);
 
