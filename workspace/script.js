@@ -2,6 +2,8 @@ let db = connect("mongodb://root:test123@localhost:27017?authSource=admin");
 // USE technocite
 db = db.getSiblingDB('technocite');
 
-const students = db.students.find();
+const students = db.students.find({
+    name: "Fred"
+});
 
 console.log(students);
