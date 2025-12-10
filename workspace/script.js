@@ -1,26 +1,66 @@
 let db = connect("mongodb://root:test123@localhost:27017?authSource=admin");
 
-db = db.getSiblingDB('technocite');
+db = db.getSiblingDB('sample_mflix');
 
-const students = db.students.find();
+// const Amaury = db.movies.find({
+//     actors: "Amaury Reeves"
+// });
 
-const premierEtudiantId = students.toArray()[0]._id;
+// console.log(Amaury);
 
-// UPDATE students SET courses = ["Java", "C#", "Mysql"]
-const updateResult = db.students.updateOne({
-    _id: premierEtudiantId
-}, {
-    $set: {
-        courses: ["Java", "C#", "Mysql"]
-    }
+// db.movies.updateOne(
+//     { directors: 'Denis Villeneuve' },
+//     { 
+//         $push: { actors: "Amaury Reeves" },
+//       	$pull: { genres: "Drama" },
+//       	$set: { "directors.$" : "Patate Man" }
+//     }
+// );
+
+// const upsertResult = db.movies.updateMany({
+//     cast: {$in: ["Charlize Theron"]}
+// }, {
+//     $inc: {"imdb.rating": 5}
+// });
+
+// console.log(upsertResult);
+
+// const movie = db.movies.find({
+//     _id: ObjectId('693989beb485593f09dd0310')
+// });
+
+// // console.log(movie);
+
+// const replaced = db.movies.replaceOne({
+//     _id: ObjectId('693989beb485593f09dd0310')
+// }, {
+//     title : "Trump in Belgium",
+//     genres: ["Comedy"],
+//     year: 2026
+// })
+
+// const trumpInBelgium = db.movies.find({
+//     _id: ObjectId('693989beb485593f09dd0310')
+// });
+
+db.movies.deleteMany({
+    directors : "Harald Zwart"
 });
 
-console.log(updateResult);
+db.movies.updateMany(
+    { title: {$in: ["+1", "Anamorph"]} },
+    { $addToSet: { cast: "Key Key" }}
+);
 
-const jammieToFreddy = db.students.updateMany({
-    name: 'Jammy'
-}, {
-    $set: {
-        name: 'Sabine'
-    }
-});
+// Vérifie les modifications
+db.movies.updateMany(
+    { title: "The matrix" },
+    { title: 1, cast: 1 }
+).toArray;
+
+db.movies.updateOne(
+    { title: "Jurassic Park" },
+    { $set: { title: "The Matrix" }}
+);
+
+console.log(trumpInBelgium);
