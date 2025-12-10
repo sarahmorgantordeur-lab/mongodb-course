@@ -3,9 +3,8 @@ let db = connect("mongodb://root:test123@localhost:27017?authSource=admin");
 db = db.getSiblingDB('sample_mflix');
 
 const movies = db.movies.find({
-    genres: {
-        // tableau
-        $type: 4
+    released:  {
+        $exists: false
     }
 });
 
