@@ -5,7 +5,7 @@ db = db.getSiblingDB('sample_mflix');
 // SELECT title FROM movies WHERE released IS NULL
 const movies = db.movies
 .find({
-    $or : [
+    $and : [
         {
             title: "Jurassic Park"
         },
