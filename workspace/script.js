@@ -4,7 +4,8 @@ db = db.getSiblingDB('technocite');
 
 const students = db.students.find({
     name:{
-        $eq: "Fred"
+        $ne: "Fred",
+        $eq: "Amaury"
     }
 });
 
