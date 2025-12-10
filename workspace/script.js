@@ -4,9 +4,6 @@ db = db.getSiblingDB('technocite');
 
 const students = db.students.find();
 
-console.log(students);
-
-
 const premierEtudiantId = students.toArray()[0]._id;
 
 // UPDATE students SET courses = ["Java", "C#", "Mysql"]
@@ -19,3 +16,11 @@ const updateResult = db.students.updateOne({
 });
 
 console.log(updateResult);
+
+const jammieToFreddy = db.students.updateMany({
+    name: 'Jammy'
+}, {
+    $set: {
+        name: 'Sabine'
+    }
+});
