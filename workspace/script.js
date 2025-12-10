@@ -19,7 +19,7 @@ db.students.insertOne({
 
 students = db.students.find({
     "notes.geography": {
-        $eq: 5
+        $in: [1,2]
     }
 });
 
