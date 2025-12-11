@@ -72,7 +72,7 @@ const aggregation = db.movies.aggregate([
     { $sort: { total: -1 }}, //important pour avoir les pires
     { $limit: 10 },
     { $out: {
-        db : "lame_directors",
+        db : "lame_directors", //important mais normalement on peut sortir dans la même db
         coll: "bad_directors"
     } }
 ]);
