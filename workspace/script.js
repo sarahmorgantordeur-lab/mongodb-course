@@ -1,6 +1,6 @@
 let db = connect("mongodb://root:test123@localhost:27017?authSource=admin");
-
 db = db.getSiblingDB('sample_mflix');
+
 
 // const Amaury = db.movies.find({
 //     actors: "Amaury Reeves"
@@ -55,7 +55,7 @@ db = db.getSiblingDB('sample_mflix');
 // Vérifie les modifications
 // db.movies.updateMany(
 //     { title: "The matrix" },
-//     { title: 1, cast: 1 }
+//     { title: 1, cast: 1 }   mettre un opérateur si je veux faire un changeement donc mettre un dolar
 // );
 
 // db.movies.updateOne(
@@ -64,3 +64,21 @@ db = db.getSiblingDB('sample_mflix');
 // );
 
 // console.log(trumpInBelgium);
+
+const aggregation = db.movies.aggregate([
+    { $match: { "imdb.rating": { $lte: 5 } } },
+    { $unwind: "$directors" },
+    { $group: { _id: "$directors", total: { $count: {} } } }, 
+    { $sort: { total: -1 }}, //important pour avoir les pires
+    { $limit: 10 },
+    { $out: {
+        db : "lame_directors",
+        coll: "bad_directors"
+    } }
+]);
+
+db = db.getSiblingDB('lame_directors');
+
+const result = db.bad_directors.find()
+
+console.log(result);
