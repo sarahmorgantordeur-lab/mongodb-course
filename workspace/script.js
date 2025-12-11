@@ -65,20 +65,39 @@ db = db.getSiblingDB('sample_mflix');
 
 // console.log(trumpInBelgium);
 
+// const aggregation = db.movies.aggregate([
+//     { $match: { "imdb.rating": { $lte: 5 } } },
+//     { $unwind: "$directors" },
+//     { $group: { _id: "$directors", total: { $count: {} } } }, 
+//     { $sort: { total: -1 }}, //important pour avoir les pires
+//     { $limit: 10 },
+//     { $out: {
+//         db : "lame_directors", //important mais normalement on peut sortir dans la même db
+//         coll: "bad_directors"
+//     } }
+// ]);
+
+// db = db.getSiblingDB('lame_directors');
+
+// const result = db.bad_directors.find()
+
 const aggregation = db.movies.aggregate([
-    { $match: { "imdb.rating": { $lte: 5 } } },
-    { $unwind: "$directors" },
-    { $group: { _id: "$directors", total: { $count: {} } } }, 
-    { $sort: { total: -1 }}, //important pour avoir les pires
-    { $limit: 10 },
-    { $out: {
-        db : "lame_directors", //important mais normalement on peut sortir dans la même db
-        coll: "bad_directors"
-    } }
-]);
+    { $lookup:
+            {
+                from: "movies",
+                localField: "movie_id",
+                foreignField: "_id",
+                as: "comments"
+            } }, 
+    { $match: { comments: { $ne: [] } } },
+    { $limit: 5 },
+    { $project : {
+        title: true,
+        comments: {
+            name: true, 
+            email: true
+        }
+    }}    
+])
 
-db = db.getSiblingDB('lame_directors');
-
-const result = db.bad_directors.find()
-
-console.log(result);
+console.log(aggregation);
