@@ -43,24 +43,24 @@ db = db.getSiblingDB('sample_mflix');
 //     _id: ObjectId('693989beb485593f09dd0310')
 // });
 
-db.movies.deleteMany({
-    directors : "Harald Zwart"
-});
+// db.movies.deleteMany({
+//     directors : "Harald Zwart"
+// });
 
-db.movies.updateMany(
-    { title: {$in: ["+1", "Anamorph"]} },
-    { $addToSet: { cast: "Key Key" }}
-);
+// db.movies.updateMany(
+//     { title: {$in: ["+1", "Anamorph"]} },
+//     { $addToSet: { cast: "Key Key" }}
+// );
 
 // Vérifie les modifications
-db.movies.updateMany(
-    { title: "The matrix" },
-    { title: 1, cast: 1 }
-).toArray;
+// db.movies.updateMany(
+//     { title: "The matrix" },
+//     { title: 1, cast: 1 }
+// );
 
-db.movies.updateOne(
-    { title: "Jurassic Park" },
-    { $set: { title: "The Matrix" }}
-);
+// db.movies.updateOne(
+//     { title: "Jurassic Park" },
+//     { $set: { title: "The Matrix" }}
+// );
 
-console.log(trumpInBelgium);
+// console.log(trumpInBelgium);
