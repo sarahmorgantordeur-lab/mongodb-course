@@ -19,6 +19,13 @@ const addressSchema = new Schema({
     }
 })
 
+interface UserInterface {
+    firstName: string,
+    lastName: string,
+    email: string,
+    password: string
+}
+
 const schema = new Schema({
     firstName: {
         type: String,
@@ -54,7 +61,11 @@ const schema = new Schema({
             return this._id + ' ' + this.firstName + ' ' + this.lastName;
         }
     },
-    
+    statics: {
+        findAndSave() {
+
+        }
+    }
 });
 
 export const UserModel = model("users", schema);

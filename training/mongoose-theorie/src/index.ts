@@ -10,9 +10,20 @@ async function init() {
         console.log("Une erreur est survenue :", e);
     }
 
-    const users = await UserModel.find();
+    const users = await UserModel.findOne({
+        email: "kit_harington@gameofthron.es"
+    });
 
-    console.log(users);
+    const newUser = new UserModel({
+        firstName: 'Jacquy',
+        lastName: 'Michel',
+        email: "jacky@michel.be"
+    });
+
+    console.log(newUser.getFullName());
+    // console.log(users?.getFullName());
+    await newUser.save();
+    console.log(newUser.getFullName());
 }
 
 init();
