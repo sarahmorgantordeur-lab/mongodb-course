@@ -11,26 +11,19 @@ async function init() {
     }
 
     const users = await UserModel.findOne({
-        name: "Bowen Marsh"
+        email: "kit_harington@gameofthron.es"
     });
 
     const newUser = new UserModel({
-        password: "pudipudi1997",
-        name: "BBBBB",
-        email: "gégé@gmail.com",
-        daysConnected: 0,
-        address: {
-            number: 69,
-            street: "Cancer Street",
-            city: "Cancer City",
-            country: "CancerLand",
-            box: "666C"
-        }
+        firstName: 'Jacquy',
+        lastName: 'Michel',
+        email: "jacky@michel.be"
     });
 
+    console.log(newUser.getFullName());
+    // console.log(users?.getFullName());
     await newUser.save();
-
-    console.log(users);
+    console.log(newUser.getFullName());
 }
 
 init();

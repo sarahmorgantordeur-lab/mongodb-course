@@ -36,7 +36,7 @@ const schema = new Schema({
         type: [String]
     },
     awards: {
-        type: new Schema({
+        type: {
             wins: {
                 type: Number
             },
@@ -46,7 +46,7 @@ const schema = new Schema({
             text: {
                 type: String
             }
-        })
+        }
     },
     lastupdated: {
         type: String

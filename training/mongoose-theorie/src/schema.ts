@@ -19,9 +19,19 @@ const addressSchema = new Schema({
     }
 })
 
+interface UserInterface {
+    firstName: string,
+    lastName: string,
+    email: string,
+    password: string
+}
 
 const schema = new Schema({
-    name: {
+    firstName: {
+        type: String,
+        required: true
+    },
+    lastName: {
         type: String,
         required: true
     },
@@ -41,6 +51,20 @@ const schema = new Schema({
     },
     address: {
         type: addressSchema
+    }
+}, {
+    methods: {
+        getFullName() {
+            if (!this.firstName || !this.lastName) {
+                return 'Anonymous';
+            }
+            return this._id + ' ' + this.firstName + ' ' + this.lastName;
+        }
+    },
+    statics: {
+        findAndSave() {
+
+        }
     }
 });
 
